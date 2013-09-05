@@ -1,0 +1,27 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+coverage
+reports
+.sass-cache
+node_modules
+public/vendor
+
+# Sublime project files
+*.sublime-project
+*.sublime-workspace
+.tern-port
+.DS_Store
+*.css
+
+# JetBrains IDE files
+.idea/

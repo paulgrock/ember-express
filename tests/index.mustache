@@ -1,0 +1,45 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <title>Mocha Spec Runner</title>
+    <link rel="stylesheet" href="/node_modules/mocha/mocha.css">
+    <script src="/public/vendor/modernizr/modernizr.js"></script>
+    <script src='/testem/chai.js'></script>
+    <script src='/testem/mocha.js'></script>
+    <script src='/node_modules/sinon-chai/lib/sinon-chai.js'></script>
+    <script src='/node_modules/sinon/pkg/sinon-1.7.3.js'></script>
+    <script src="/testem.js"></script>
+    <script>
+      assert = chai.assert;
+      var should = chai.should();
+      expect = chai.expect;
+      mocha.setup('bdd');
+    </script>
+    <script src="/public/vendor/requirejs/require.js"></script>
+
+</head>
+<body>
+    <div id="coverage"></div>
+    <div id="menu"></div>
+    <div id="mocha"></div>
+    <script>
+      var files = [];
+      {{#serve_files}}
+        files.push("../{{src}}");
+      {{/serve_files}}
+      require(["/public/javascripts/common.js"], function(rConfig){
+        require.config({
+          baseUrl: '/public/javascripts'
+        });
+        require(files, function() {
+          mocha.run();
+        });
+      });
+    </script>
+
+   <!--
+   <script src="/node_modules/blanket/dist/qunit/blanket.js" data-cover-only="//public\/javascripts\/(.*)/" data-cover-never="//vendor\/(.*)/"></script>
+    <script src="/node_modules/blanket/src/adapters/mocha-blanket.js"></script>
+    -->
+</body>
+</html>

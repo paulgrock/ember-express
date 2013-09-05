@@ -1,0 +1,24 @@
+!!! 5
+//if lt IE 7
+  <html class='no-js ie6 oldie' lang='#{lang}'>
+//if IE 7
+  <html class='no-js ie7 oldie' lang='#{lang}'>
+//if IE 8
+  <html class='no-js ie8 oldie' lang='#{lang}'>
+//[if gt IE 8]><!
+html(class='no-js', lang='#{lang}')
+  //<![endif]
+  head
+    meta(charset='utf-8')
+    meta(name='lang', content='en')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes')
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(src='/vendor/modernizr/modernizr.js')
+  body
+    block content
+
+    script(src='/vendor/requirejs/require.js')
+    script.
+      require(['/javascripts/common.js'], function(rConfig){});

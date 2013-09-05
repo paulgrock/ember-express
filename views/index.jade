@@ -1,0 +1,71 @@
+extends layout
+
+block content
+
+  script(type="text/x-handlebars").
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a href="#" class="brand">bloggr</a>
+        <ul class="nav">
+          <li>{{#link-to 'posts'}}Posts{{/link-to}}</li>
+          <li>{{#link-to 'about'}}About{{/link-to}}</li>
+        </ul>
+      </div>
+    </div>
+    {{input type="text" value=name placeholder="Enter your name"}}
+
+    <span>{{name}}</span>
+    {{outlet}}
+  script#about(type="text/x-handlebars").
+    <div class="about"><p>First Ember app</p></div>
+
+  script#posts(type="text/x-handlebars").
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Recent Posts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each}}
+                            <tr>
+                                <td>
+                                    {{#link-to 'post' this}}
+                                        {{{title}}} <small class="muted">by {{author.name}}</small>
+                                    {{/link-to}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="span9">
+                {{outlet}}
+            </div>
+        </div>
+    </div>
+
+  script#post(type="text/x-handlebars").
+    {{#if isEditing}}
+        {{#partial 'post/edit'}}{{/partial}}
+        <button {{action 'doneEditing'}}>Done</button>
+    {{else}}
+        <button {{action 'edit'}}>Edit</button>
+    {{/if}}
+    <h1>{{{title}}}</h1>
+    <h2>by {{author.name}} <small class="muted">({{format-date date}})</small></h2>
+    <hr>
+    <div class="intro">
+        {{format-markdown excerpt}}
+    </div>
+    <div class="below-the-fold">
+        {{format-markdown body}}
+    </div>
+
+  script(id="post/_edit", type="text/x-handlebars").
+    <p>{{input type="text" value=title}}</p>
+    <p>{{input type="text" value=excerpt}}</p>
+    <p>{{textarea value=body}}</p>

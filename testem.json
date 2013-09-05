@@ -1,0 +1,24 @@
+{
+  "test_page": "tests/index.mustache",
+  "framework": "mocha+chai",
+  "launch_in_dev": [
+    "chrome",
+    "phantomJS"
+  ],
+  "launch_in_ci" : [
+    "phantomJS"
+  ],
+  "route": {
+    "/scripts": "/public/javascripts"
+  },
+  "src_files": [
+    "public/javascripts/**/*.js",
+    "tests/**/*.test.js"
+  ],
+  "src_files_ignore": [
+    "public/vendor/**/*.js"
+  ],
+  "serve_files": [
+    "tests/**/*.test.js"
+  ]
+}
